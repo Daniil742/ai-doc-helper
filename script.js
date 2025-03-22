@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const finalPrompt = `Documentation:\n${documentationContext}\n\Question:\n${queryText}`;
         console.log('Prepared Request:', finalPrompt);
 
-        alert('The request has been generated! Check the browser console.');
+        //alert('The request has been generated! Check the browser console.');
+        await sendDirectChatRequest(finalPrompt);
       });
     });
 
