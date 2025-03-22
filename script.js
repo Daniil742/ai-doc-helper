@@ -54,11 +54,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const finalPrompt = `Documentation:\n${documentationContext}\n\Question:\n${queryText}`;
         console.log('Prepared Request:', finalPrompt);
 
+        const initialMsg = messagesContainer.querySelector('.chat-center');
+        if (initialMsg) {
+          messagesContainer.removeChild(initialMsg);
+        }
+            
         //alert('The request has been generated! Check the browser console.');
         addChatMessage('user', queryText);
-
         queryInput.value = "";
-        
+
+        const spinnerIndicator = addLoadingIndicator();
+            
         await sendDirectChatRequest(finalPrompt);
       });
     });
@@ -85,6 +91,8 @@ async function sendDirectChatRequest(finalPrompt) {
       body: JSON.stringify(payload)
     });
 
+    spinnerIndicator.remove();
+        
     if (!response.ok) {
       const errorData = await response.json();
       addChatMessage('bot', `Error: ${errorData.error.message || "Request error"}`);
@@ -103,6 +111,7 @@ async function sendDirectChatRequest(finalPrompt) {
   } catch (error) {
     //console.error("Error while executing the query:", error);
     //alert(`Error: ${error.message}`);
+    spinnerIndicator.remove();
     addChatMessage('bot', `Error while executing the query: ${error.message}`);
   }
 }
@@ -127,3 +136,17 @@ function addChatMessage(role, messageText) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
+function addLoadingIndicator() {
+  const messagesContainer = document.getElementById('chat-messages');
+  const spinnerDiv = document.createElement('div');
+
+  spinnerDiv.classList.add('chat-message', 'bot-message', 'loading-indicator');
+  
+  spinnerDiv.innerHTML = '<div class="spinner"></div>';
+  
+  messagesContainer.appendChild(spinnerDiv);
+  
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  
+  return spinnerDiv;
+}
