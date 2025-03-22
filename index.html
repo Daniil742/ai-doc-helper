@@ -16,24 +16,33 @@
       <h2>About the project</h2>
       <p>This template is for future integration of an AI bot that will handle technical documentation. Here you will be able to customize the help source by specifying a URL and add a key for ChatGPT. The bot will then answer your questions using data from the documentation.</p>
 
-      <h2>Customizing the data source</h2>
-      <div class="form-group form-flex">
-        <label for="doc-url">Documentation URL:</label>
-        <input type="text" id="doc-url" placeholder="https://example.com/docs">
+      <div class="settings">
+        <h2>Customizing the data source</h2>
+        
+        <div class="form-group form-flex">
+          <label for="doc-url">Documentation URL:</label>
+          <input type="text" id="doc-url" placeholder="https://example.com/docs">
+        </div>
+        
+        <div class="form-group">
+          <label for="api-key">ChatGPT API Key:</label>
+          <input type="text" id="api-key" placeholder="Enter your API key">
+        </div>
       </div>
 
-      <div class="form-group form-flex">
-        <label for="api-key">ChatGPT API key:</label>
-        <input type="text" id="api-key" placeholder="Enter your API key">
+      <div class="chat-container">
+        <h2>Ask a question</h2>
+        
+        <div id="chat-messages" class="chat-messages">
+          <div class="chat-message chat-center">Chat</div>
+        </div>
+        
+        <div class="chat-input-area">
+          <textarea id="query" placeholder="Enter your question"></textarea>
+          <button class="btn">Send request</button>
+        </div>
       </div>
-
-      <h2>Ask a question</h2>
-      <div class="form-group">
-        <label for="query">Your request:</label>
-        <textarea id="query" placeholder="Enter your question"></textarea>
-      </div>
-
-      <button class="btn">Send request</button>
+      
     </div>
   </div>
 
