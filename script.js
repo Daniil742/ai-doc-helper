@@ -56,7 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         //alert('The request has been generated! Check the browser console.');
         addChatMessage('user', queryText);
-            
+
+        queryInput.value = "";
+        
         await sendDirectChatRequest(finalPrompt);
       });
     });
