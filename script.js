@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			return;
 		}
 
-		const finalPrompt = `Documentation:\n${documentationContext}\n\Question:\n${queryText}`;
+		const finalPrompt = `Documentation:\n${documentationContext}\n\nQuestion:\n${queryText}`;
 		console.log('Prepared Request:', finalPrompt);
             
 		const messagesContainer = document.getElementById('chat-messages');
@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		const spinnerIndicator = addLoadingIndicator();
             
-		await sendDirectChatRequest(finalPrompt);
+		await sendDirectChatRequest(finalPrompt, spinnerIndicator);
 	});
 });
 
-async function sendDirectChatRequest(finalPrompt) {
+async function sendDirectChatRequest(finalPrompt, spinnerIndicator) {
 	const apiKey = document.getElementById('api-key').value.trim();
   
 	const payload = {
