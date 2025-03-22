@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Prepared Request:', finalPrompt);
 
         //alert('The request has been generated! Check the browser console.');
+        addChatMessage('user', queryText);
+            
         await sendDirectChatRequest(finalPrompt);
       });
     });
@@ -83,14 +85,43 @@ async function sendDirectChatRequest(finalPrompt) {
 
     if (!response.ok) {
       const errorData = await response.json();
+      addChatMessage('bot', `Error: ${errorData.error.message || "Request error"}`);
       throw new Error(errorData.error.message || "Request error");
     }
 
     const data = await response.json();
     console.log("Reply from ChatGPT:", data);
-    // Here we need to process the response: display it on the page, for example in a div or textarea.
+    if (data.choices && data.choices.length > 0 && data.choices[0].message) {
+      const answer = data.choices[0].message.content;
+      addChatMessage('bot', answer);
+    } else {
+      addChatMessage('bot', "The answer does not contain the required data");
+    }
+
   } catch (error) {
-    console.error("Error while executing the query:", error);
-    alert(`Error: ${error.message}`);
+    //console.error("Error while executing the query:", error);
+    //alert(`Error: ${error.message}`);
+    addChatMessage('bot', `Error while executing the query: ${error.message}`);
   }
 }
+
+function addChatMessage(role, messageText) {
+
+  const messagesContainer = document.getElementById('chat-messages');
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('chat-message');
+
+  if (role === 'user') {
+    messageDiv.classList.add('user-message');
+  } else if (role === 'bot') {
+    messageDiv.classList.add('bot-message');
+  }
+  
+  messageDiv.textContent = messageText;
+  
+  messagesContainer.appendChild(messageDiv);
+  
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
