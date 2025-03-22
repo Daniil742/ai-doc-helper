@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Документация Ассистент</title>
+  <title>AI Doc Assistant</title>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -118,34 +118,32 @@
 </head>
 <body>
   <header>
-    <h1>AI Документация Ассистент</h1>
-    <p>Статическая адаптивная страница для GitHub Pages</p>
+    <h1>AI Doc Assistant</h1>
   </header>
 
   <div class="container">
     <div class="content">
-      <h2>О проекте</h2>
-      <p>Этот шаблон предназначен для будущей интеграции AI-бота, который будет работать с технической документацией. Здесь вы сможете настроить источник справки, указав URL, и добавить ключ для ChatGPT. В дальнейшем бот будет отвечать на ваши вопросы, используя данные из документации.</p>
+      <h2>About the project</h2>
+      <p>This template is for future integration of an AI bot that will handle technical documentation. Here you will be able to customize the help source by specifying a URL and add a key for ChatGPT. The bot will then answer your questions using data from the documentation.</p>
 
-      <h2>Настройка источника данных</h2>
+      <h2>Customizing the data source</h2>
       <div class="form-group form-flex">
-        <label for="doc-url">URL документации:</label>
+        <label for="doc-url">Documentation URL:</label>
         <input type="text" id="doc-url" placeholder="https://example.com/docs">
       </div>
 
       <div class="form-group form-flex">
-        <label for="api-key">API ключ ChatGPT:</label>
-        <input type="text" id="api-key" placeholder="Введите ваш API ключ">
+        <label for="api-key">ChatGPT API key:</label>
+        <input type="text" id="api-key" placeholder="Enter your API key">
       </div>
 
-      <h2>Задать вопрос</h2>
+      <h2>Ask a question</h2>
       <div class="form-group">
-        <label for="query">Ваш запрос:</label>
-        <textarea id="query" placeholder="Введите ваш вопрос"></textarea>
+        <label for="query">Your request:</label>
+        <textarea id="query" placeholder="Enter your question"></textarea>
       </div>
 
-      <!-- Поскольку логика отправки запроса пока не реализована, кнопка просто демонстрирует внешний вид -->
-      <button class="btn">Отправить запрос</button>
+      <button class="btn">Send request</button>
     </div>
   </div>
 </body>
