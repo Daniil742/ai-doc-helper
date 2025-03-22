@@ -57,3 +57,39 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('The request has been generated! Check the browser console.');
       });
     });
+
+async function sendDirectChatRequest(finalPrompt) {
+
+  const apiKey = document.getElementById('api-key').value.trim();
+  
+  const payload = {
+    model: "gpt-3.5-turbo",
+    messages: [
+      { role: "system", content: "You're the technical expert on documentation." },
+      { role: "user", content: finalPrompt }
+    ]
+  };
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error.message || "Request error");
+    }
+
+    const data = await response.json();
+    console.log("Reply from ChatGPT:", data);
+    // Here we need to process the response: display it on the page, for example in a div or textarea.
+  } catch (error) {
+    console.error("Error while executing the query:", error);
+    alert(`Error: ${error.message}`);
+  }
+}
