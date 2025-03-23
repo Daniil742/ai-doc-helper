@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		let documentationContext = '';
 
 	        try {
-		    const response = await fetch(docUrl);
+			const response = await fetch(docUrl);
 		    if (!response.ok) {
 		        alert(`Error loading documentation: ${response.status}`);
 		        return;
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		    const parser = new DOMParser();
 		    const doc = parser.parseFromString(documentationContext, 'text/html');
+		    doc.querySelectorAll('body script').forEach(script => script.remove());
 		    documentationContext = doc.body.textContent || "";
 		    
 		    console.log(documentationContext);
