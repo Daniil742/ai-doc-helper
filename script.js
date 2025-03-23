@@ -36,8 +36,29 @@ document.addEventListener('DOMContentLoaded', function() {
 			alert('Please fill in all fields!');
 			return;
 		}
+
+		let documentationContext = '';
+
+	        try {
+		    const response = await fetch(docUrl);
+		    if (!response.ok) {
+		        alert(`Error loading documentation: ${response.status}`);
+		        return;
+		    }
+		    documentationContext = await response.text();
 		
-		const finalPrompt = !docUrl ? `Question:\n${queryText}` : `Use the following documentation source:\n${docUrl}\n\nQuestion:\n${queryText}`;
+		    const parser = new DOMParser();
+		    const doc = parser.parseFromString(documentationContext, 'text/html');
+		    documentationContext = doc.body.textContent || "";
+		    
+		    console.log(documentationContext);
+		} catch (error) {
+		    console.error('Error loading documentation:', error);
+		    alert('There was an error loading the documentation.');
+		    return;
+		}
+		
+		const finalPrompt = !docUrl ? `Question:\n${queryText}` : `Use the following documentation source:\n${documentationContext}\n\nQuestion:\n${queryText}`;
 		console.log('Prepared Request:', finalPrompt);
             
 		const messagesContainer = document.getElementById('chat-messages');
