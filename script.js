@@ -60,7 +60,7 @@ async function sendDirectChatRequest(finalPrompt, spinnerIndicator) {
 	const apiKey = document.getElementById('api-key').value.trim();
   
 	const payload = {
-		model: "gpt-3.5-turbo",
+		model: "gpt-4",
 		messages: [
 			{ role: "system", content: "You're the technical expert on documentation." },
 			{ role: "user", content: finalPrompt }
